@@ -12,6 +12,13 @@
   },
   "dependencies": {
     "@google/genai": "^2.32.0",
+    "@tailwindcss/vite": "^4.1.14",
+    "@types/express": "^5.0.6",
+    "@types/node": "^22.14.0",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "@types/three": "^0.185.1",
+    "@vitejs/plugin-react": "^4.3.4",
     "clsx": "^2.1.1",
     "dotenv": "^18.0.9",
     "express": "^5.3.0",
@@ -25,18 +32,9 @@
     "rehype-raw": "^7.0.0",
     "remark-gfm": "^4.0.1",
     "tailwind-merge": "^2.5.2",
-    "three": "^0.185.1",
-    "tsx": "^4.23.15"
-  },
-  "devDependencies": {
-    "@tailwindcss/vite": "^4.1.14",
-    "@types/express": "^5.0.6",
-    "@types/node": "^22.14.0",
-    "@types/react": "^19.0.0",
-    "@types/react-dom": "^19.0.0",
-    "@types/three": "^0.185.1",
-    "@vitejs/plugin-react": "^4.3.4",
     "tailwindcss": "^4.1.14",
+    "three": "^0.185.1",
+    "tsx": "^4.23.15",
     "typescript": "~5.8.2",
     "vite": "^6.2.0"
   }
