@@ -1,0 +1,43 @@
+{
+  "name": "reference-portfolio",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "tsx server.ts",
+    "start": "tsx server.ts",
+    "build": "tsc -b && vite build",
+    "preview": "vite preview",
+    "lint": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@google/genai": "^2.32.0",
+    "clsx": "^2.1.1",
+    "dotenv": "^18.0.9",
+    "express": "^5.3.0",
+    "lucide-react": "^0.546.0",
+    "motion": "^12.23.24",
+    "openai": "^7.45.1",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "react-markdown": "^10.1.0",
+    "react-router-dom": "^7.2.0",
+    "rehype-raw": "^7.0.0",
+    "remark-gfm": "^4.0.1",
+    "tailwind-merge": "^2.5.2",
+    "three": "^0.185.1"
+  },
+  "devDependencies": {
+    "@tailwindcss/vite": "^4.1.14",
+    "@types/express": "^5.0.6",
+    "@types/node": "^22.14.0",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "@types/three": "^0.185.1",
+    "@vitejs/plugin-react": "^4.3.4",
+    "tailwindcss": "^4.1.14",
+    "tsx": "^4.23.15",
+    "typescript": "~5.8.2",
+    "vite": "^6.2.0"
+  }
+}
