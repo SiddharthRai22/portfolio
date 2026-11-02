@@ -10,8 +10,38 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const app = express();
-const PORT = process.env.PORT ? parseInt(process.env.PORT, 10) : 3000;
+const PORT = process.env.PORT ? parseInt(process.env.PORT, 10) : 4000;
 const isProduction = process.env.NODE_ENV === 'production';
+
+// Allow requests from the frontend static site and Render domains
+const allowedOrigins = [
+  process.env.FRONTEND_URL,
+  'http://localhost:3000',
+  'http://localhost:4173',
+].filter(Boolean);
+
+app.use((req, res, next) => {
+  const origin = req.headers.origin;
+  const isAllowed =
+    !origin ||
+    !process.env.FRONTEND_URL ||
+    allowedOrigins.includes(origin) ||
+    origin.endsWith('.onrender.com');
+
+  if (isAllowed && origin) {
+    res.setHeader('Access-Control-Allow-Origin', origin);
+  } else if (!origin) {
+    res.setHeader('Access-Control-Allow-Origin', '*');
+  }
+
+  res.setHeader('Access-Control-Allow-Methods', 'GET,POST,OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type,Authorization');
+  if (req.method === 'OPTIONS') {
+    res.sendStatus(204);
+    return;
+  }
+  next();
+});
 
 app.use(express.json());
 
@@ -230,23 +260,13 @@ app.post('/api/assistant/chat', async (req, res) => {
 });
 
 async function startServer() {
-  if (!isProduction) {
-    const { createServer: createViteServer } = await import('vite');
-    const vite = await createViteServer({
-      server: { middlewareMode: true },
-      appType: 'spa',
-    });
-    app.use(vite.middlewares);
-  } else {
-    const distPath = path.resolve(__dirname, 'dist');
-    app.use(express.static(distPath));
-    app.use((_req, res) => {
-      res.sendFile(path.resolve(distPath, 'index.html'));
-    });
-  }
+  // Health check
+  app.get('/health', (_req, res) => {
+    res.json({ status: 'ok' });
+  });
 
   app.listen(PORT, '0.0.0.0', () => {
-    console.log(`AI Assistant & Portfolio server running at http://0.0.0.0:${PORT}`);
+    console.log(`AI API server running at http://0.0.0.0:${PORT}`);
   });
 }
 
